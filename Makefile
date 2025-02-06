@@ -10,7 +10,7 @@ DIR_MLX = $(DIR_INCLUDES)/mlx
 
 MLX_FLAGS = -I$(DIR_MLX) -L$(DIR_MLX) -lmlx -lXext -lX11
 
-SRC = $(addprefix $(DIR_SRC)/, test.c)
+SRC = $(addprefix $(DIR_SRC)/, test.c utils.c render.c)
 OBJ = $(addprefix $(DIR_OBJ)/, $(notdir $(SRC:.c=.o)))
 
 PRINTF = $(DIR_PRINTF)/libftprintf.a
