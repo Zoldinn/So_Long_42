@@ -10,11 +10,19 @@ int	main(void)
 
 	data.win = mlx_new_window(data.mlx, 1920, 1080, "So_Long");
 	if (data.win == NULL)
-		ft_error(&data);
-	data.img.mlx_img = mlx_new_image(data.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+		return (free(data.mlx), EXIT_FAILURE);
+
+	data.img.mlx_img = mlx_new_image(data.mlx, WIDTH, HEIGHT);
+	data.img.addr = mlx_get_data_addr(data.img.mlx_img,
+						&data.img.bpp, &data.img.size_line, &data.img.endian);
+
 	mlx_key_hook(data.win, &key_esc, &data);
 	mlx_loop_hook(data.mlx, &render, &data);
-
+	
 	mlx_loop(data.mlx);
-	return (EXIT_SUCCESS);
+
+	mlx_destroy_image(data.mlx, data.img.mlx_img);
+	mlx_destroy_display(data.mlx);
+	
+	return (free(data.mlx), EXIT_SUCCESS);
 }
