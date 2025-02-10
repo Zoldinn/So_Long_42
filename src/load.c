@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.c                                           :+:      :+:    :+:   */
+/*   load.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 16:02:24 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/10 16:50:08 by lefoffan         ###   ########.fr       */
+/*   Created: 2025/02/10 18:33:17 by lefoffan          #+#    #+#             */
+/*   Updated: 2025/02/10 19:24:23 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	render(t_data *data)
+t_sprite	*ft_sprite_init(t_data *data, char *path)
 {
-	t_sprite	sprite;
+	t_sprite	*sprite;
 
-	if (data->win == NULL)
-		return (FAIL);
-
-	sprite.path = "sprites/wall_front_view2.xpm";
-	sprite.img = mlx_xpm_file_to_image(data->mlx, sprite.path, &sprite.width, &sprite.height);
-
-	mlx_put_image_to_window(data->mlx, data->win, sprite.img, WIDTH/2, HEIGHT/2);
-	
-	return (OK);
+	sprite->path = path;
+	sprite->img = mlx_xpm_file_to_image(data->mlx, sprite->path,
+										&sprite->width, &sprite->height);
+	if (sprite->img == NULL)
+	{
+		perror("Error loading image, ernno :\n");
+		ft_end_game(data);
+	}
+	return (sprite);
 }
 
+// fonction pour appeler sprite init et load toutes les images.
