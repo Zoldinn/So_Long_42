@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:07:34 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/05 15:38:46 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:12:37 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_gnl	*ft_make_list(t_gnl **list, int fd)
 	return (*list);
 }
 
-char	*get_next_line(int fd)
+char	*ft_get_next_line(int fd)
 {
 	static t_gnl	*list = NULL;
 	char			*line;

@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/10 19:17:33 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:31:04 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,22 @@
 # define PATH_POTION	"sprites/potion.xpm"
 # define PATH_PLAYER	"sprites/player.xpm"
 //* sprites
-# define GROUND			data->sprites[0]
-# define WALL			data->sprites[1]
-# define DOOR_OPEN		data->sprites[2]
-# define DOOR_CLOSE		data->sprites[3]
-# define POTION			data->sprites[4]
-# define PLAYER			data->sprites[5]
+# define GROUND			sprites[0]
+# define WALL			sprites[1]
+# define DOOR_OPEN		sprites[2]
+# define DOOR_CLOSE		sprites[3]
+# define POTION			sprites[4]
+# define PLAYER			sprites[5]
 
 typedef struct s_sprite
 {
 	void	*img;
-	char	*addr;
 	char	*path;
 	int		width;
 	int		height;
 }			t_sprite;
 
-//* pas sur du besoin ?
+//? pas sur du besoin
 /* typedef struct s_imgs
 {
 	void	*mlx_img;
@@ -70,15 +69,19 @@ typedef struct s_sprite
 	int		endian;
 }			t_imgs; */
 
-typedef struct s_data
+typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
 	// t_imgs	img;
-	t_sprite	**sprites;
-}				t_data;
+	t_sprite	sprites[6];
+	char		**map;
+}				t_game;
 
-int	ft_escape_to_quit(int key, t_data *data);
-int	ft_end_game(t_data *data);
+int		ft_escape_to_quit(int key, t_game *game);
+int		ft_end_game(t_game *game);
+int		ft_render(t_game *game);
+int		ft_load_map(t_game *game, int fdmap);
+void	ft_load_sprites(t_game *game);
 
 #endif

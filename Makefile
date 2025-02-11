@@ -7,10 +7,12 @@ DIR_INCLUDES = includes
 DIR_PRINTF = $(DIR_INCLUDES)/ft_printf
 DIR_LIBFT = $(DIR_INCLUDES)/libft
 DIR_MLX = $(DIR_INCLUDES)/mlx
+DIR_GNL = $(DIR_INCLUDES)/gnl
 
 MLX_FLAGS = -I$(DIR_MLX) -L$(DIR_MLX) -lmlx -lXext -lX11
+GNL_FILES = $(addprefix $(DIR_GNL)/, get_next_line.c get_next_line_utils.c)
 
-SRC = $(addprefix $(DIR_SRC)/, test.c utils.c render.c)
+SRC = $(addprefix $(DIR_SRC)/, so_long.c load.c utils.c key_hooks.c render.c)
 OBJ = $(addprefix $(DIR_OBJ)/, $(notdir $(SRC:.c=.o)))
 
 PRINTF = $(DIR_PRINTF)/libftprintf.a
@@ -20,7 +22,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(PRINTF) $(LIBFT)
 	@echo "🔨 Compilation de $(NAME)..."
-	@cc $(OBJ) $(PRINTF) $(LIBFT) $(CFLAGS) $(MLX_FLAGS) -o $(NAME)
+	@cc $(OBJ) $(PRINTF) $(LIBFT) $(GNL_FILES) $(CFLAGS) $(MLX_FLAGS) -o $(NAME)
 	@echo "✅ Compilation réussie !"
 
 $(DIR_OBJ)/%.o:$(DIR_SRC)/%.c | $(DIR_OBJ)
