@@ -6,16 +6,35 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:19 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/11 15:33:12 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:46:58 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+//* pas destroy window --> deja avec la fonction pour ESCAPE
+int	ft_end_game(t_game *game)
+{
+	if (game->GROUND.img)
+		mlx_destroy_image(game->mlx, game->GROUND.img);
+	if (game->WALL.img)
+		mlx_destroy_image(game->mlx, game->WALL.img);
+	if (game->DOOR_OPEN.img)
+		mlx_destroy_image(game->mlx, game->DOOR_OPEN.img);
+	if (game->DOOR_CLOSE.img)
+		mlx_destroy_image(game->mlx, game->DOOR_CLOSE.img);
+	if (game->POTION.img)
+		mlx_destroy_image(game->mlx, game->POTION.img);
+	if (game->PLAYER.img)
+		mlx_destroy_image(game->mlx, game->PLAYER.img);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	exit(EXIT_SUCCESS);
+}
+
 int	main(int ac, char **av)
 {
 	t_game	game;
-	int		fdmap;
 
 	if (ac != 2)
 		return (write(2, "Enter the path of the map only\n", 31), FAIL);
@@ -26,8 +45,7 @@ int	main(int ac, char **av)
 	if (game.win == NULL)
 		return (free(game.mlx), EXIT_FAILURE);
 
-	fdmap = open(av[1], O_RDONLY);
-	ft_load_map(&game, fdmap);
+	game.map = ft_load_map(open(av[1], O_RDONLY));
 	int i = 0;
 	while (game.map[i])
 		ft_printf("%s", game.map[i++]);

@@ -6,23 +6,25 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:33:17 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/12 14:11:18 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:13:27 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	ft_load_map(t_game *game, int fdmap)
+char	**ft_load_map(int fdmap)
 {
 	char	**map;
+	char	*line;
 
-	map = game->map;
-	*map = get_next_line(fdmap);
-	if (*map == NULL)
-		return (perror("Error loading map"), ft_end_game(game), FAIL);
-	while (*map++ != NULL)
-		*map = get_next_line(fdmap);
-	return (OK);
+	map = NULL;
+	line = get_next_line(fdmap);
+	while (line)
+	{
+		map = ft_add_line(map, line);
+		line = get_next_line(fdmap);
+	}
+	return (map);
 }
 
 t_sprite	ft_sprite_init(t_game *game, char *path)

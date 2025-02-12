@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/11 15:31:04 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:46:12 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ typedef struct s_game
 int		ft_escape_to_quit(int key, t_game *game);
 int		ft_end_game(t_game *game);
 int		ft_render(t_game *game);
-int		ft_load_map(t_game *game, int fdmap);
 void	ft_load_sprites(t_game *game);
+char	**ft_load_map(int fdmap);
+char	**ft_add_line(char **old_map, char *new_line);
 
 #endif
