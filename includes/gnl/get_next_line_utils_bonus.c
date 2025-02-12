@@ -6,15 +6,15 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:59:57 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/05 15:41:00 by lefoffan         ###   ########.fr       */
+/*   Updated: 2024/12/17 12:11:49 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-void	ft_free_list(t_gnl **list)
+void	ft_free_list(t_list **list)
 {
-	t_gnl	*tmp;
+	t_list	*tmp;
 
 	if (!(*list))
 		return ;
@@ -32,7 +32,7 @@ void	ft_free_list(t_gnl **list)
 	list = NULL;
 }
 
-t_gnl	*ft_lst_last(t_gnl *list)
+t_list	*ft_lst_last(t_list *list)
 {
 	if (!list)
 		return (NULL);
@@ -41,7 +41,7 @@ t_gnl	*ft_lst_last(t_gnl *list)
 	return (list);
 }
 
-int	ft_strchr_gnl(char *str, char x)
+int	ft_strchr(char *str, char x)
 {
 	int	i;
 
@@ -57,7 +57,7 @@ int	ft_strchr_gnl(char *str, char x)
 	return (-1);
 }
 
-int	ft_size_line(t_gnl *list)
+int	ft_size_line(t_list *list)
 {
 	int	size;
 
