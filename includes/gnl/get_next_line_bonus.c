@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 16:07:34 by lefoffan          #+#    #+#             */
-/*   Updated: 2024/12/17 12:18:57 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:09:07 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ void	*ft_calloc(size_t count, size_t size)
 	return (mem);
 }
 
-t_list	*ft_cut_list(t_list **list)
+t_gnl	*ft_cut_gnl(t_gnl **list)
 {
-	t_list	*new_head;
+	t_gnl	*new_head;
 	char	*buf;
 
-	new_head = malloc(sizeof(t_list));
+	new_head = malloc(sizeof(t_gnl));
 	if (!new_head || !ft_lst_last(*list))
 		return (NULL);
 	buf = ft_lst_last(*list)->string;
 	if (!buf)
 		return (NULL);
-	new_head->string = ft_sub_str(buf, ft_strchr(buf, '\n') + 1);
+	new_head->string = ft_sub_str(buf, ft_gstrchr(buf, '\n') + 1);
 	if (!new_head->string || (new_head->string && !new_head->string[0]))
 	{
 		free(new_head->string);
@@ -51,7 +51,7 @@ t_list	*ft_cut_list(t_list **list)
 	return (ft_free_list(list), new_head);
 }
 
-char	*ft_get_line(t_list *list)
+char	*ft_get_line(t_gnl *list)
 {
 	char	*line;
 	int		i;
@@ -78,11 +78,11 @@ char	*ft_get_line(t_list *list)
 	return (line);
 }
 
-t_list	*ft_make_list(t_list **list, int fd)
+t_gnl	*ft_make_list(t_gnl **list, int fd)
 {
-	t_list	*node;
+	t_gnl	*node;
 
-	node = malloc(sizeof(t_list));
+	node = malloc(sizeof(t_gnl));
 	if (!node)
 		return (NULL);
 	if (!(*list))
@@ -97,20 +97,20 @@ t_list	*ft_make_list(t_list **list, int fd)
 		return (NULL);
 	node->string[node->readed] = '\0';
 	node->next = NULL;
-	if (node->readed > 0 && (ft_strchr(node->string, '\n') < 0))
+	if (node->readed > 0 && (ft_gstrchr(node->string, '\n') < 0))
 		ft_make_list(list, fd);
 	return (*list);
 }
 
 char	*get_next_line(int fd)
 {
-	static t_list	*list[1024] = {NULL};
+	static t_gnl	*list[1024] = {NULL};
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, NULL, 0) < 0
 		|| (list[fd] && list[fd]->readed <= 0))
 		return (ft_free_list(&list[fd]), NULL);
-	if (!list[fd] || (list[fd] && ft_strchr(list[fd]->string, '\n') < 0
+	if (!list[fd] || (list[fd] && ft_gstrchr(list[fd]->string, '\n') < 0
 			&& list[fd]->readed > 0))
 	{
 		list[fd] = ft_make_list(&list[fd], fd);
@@ -120,7 +120,7 @@ char	*get_next_line(int fd)
 	line = ft_get_line(list[fd]);
 	if (!line)
 		return (ft_free_list(&list[fd]), NULL);
-	list[fd] = ft_cut_list(&list[fd]);
+	list[fd] = ft_cut_gnl(&list[fd]);
 	return (line);
 }
 
@@ -153,11 +153,11 @@ char	*get_next_line(int fd)
 	return (0);
 } */
 
-/* void	ft_print_list(t_list *list)
+/* void	ft_print_gnl(t_gnl *list)
 {
 	if (!list)
 	{
-		printf("ft_print_list : error.\n");
+		printf("ft_print_gnl : error.\n");
 		return ;
 	}
 	while (list)

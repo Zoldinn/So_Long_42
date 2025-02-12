@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:33:17 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/11 15:31:11 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:11:18 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	ft_load_map(t_game *game, int fdmap)
 	char	**map;
 
 	map = game->map;
-	*map = ft_get_next_line(fdmap);
+	*map = get_next_line(fdmap);
 	if (*map == NULL)
 		return (perror("Error loading map"), ft_end_game(game), FAIL);
 	while (*map++ != NULL)
-		*map = ft_get_next_line(fdmap);
+		*map = get_next_line(fdmap);
 	return (OK);
 }
 

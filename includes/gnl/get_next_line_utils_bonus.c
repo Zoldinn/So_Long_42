@@ -6,15 +6,15 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 15:59:57 by lefoffan          #+#    #+#             */
-/*   Updated: 2024/12/17 12:11:49 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/12 14:09:10 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-void	ft_free_list(t_list **list)
+void	ft_free_list(t_gnl **list)
 {
-	t_list	*tmp;
+	t_gnl	*tmp;
 
 	if (!(*list))
 		return ;
@@ -32,7 +32,7 @@ void	ft_free_list(t_list **list)
 	list = NULL;
 }
 
-t_list	*ft_lst_last(t_list *list)
+t_gnl	*ft_lst_last(t_gnl *list)
 {
 	if (!list)
 		return (NULL);
@@ -41,7 +41,7 @@ t_list	*ft_lst_last(t_list *list)
 	return (list);
 }
 
-int	ft_strchr(char *str, char x)
+int	ft_gstrchr(char *str, char x)
 {
 	int	i;
 
@@ -57,18 +57,18 @@ int	ft_strchr(char *str, char x)
 	return (-1);
 }
 
-int	ft_size_line(t_list *list)
+int	ft_size_line(t_gnl *list)
 {
 	int	size;
 
 	size = 0;
-	while (list && list->string && ft_strchr(list->string, '\n') < 0)
+	while (list && list->string && ft_gstrchr(list->string, '\n') < 0)
 	{
 		size += BUFFER_SIZE;
 		list = list->next;
 	}
 	if (list && list->string && list->string[0] != '\0')
-		size += ft_strchr(list->string, '\n');
+		size += ft_gstrchr(list->string, '\n');
 	return (++size);
 }
 
