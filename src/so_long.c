@@ -6,13 +6,12 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:19 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/12 15:46:58 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:59:53 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-//* pas destroy window --> deja avec la fonction pour ESCAPE
 int	ft_end_game(t_game *game)
 {
 	if (game->GROUND.img)
@@ -46,9 +45,6 @@ int	main(int ac, char **av)
 		return (free(game.mlx), EXIT_FAILURE);
 
 	game.map = ft_load_map(open(av[1], O_RDONLY));
-	int i = 0;
-	while (game.map[i])
-		ft_printf("%s", game.map[i++]);
 	ft_load_sprites(&game);
 	ft_render(&game);
 

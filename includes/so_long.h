@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/12 15:46:12 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:19:30 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,38 +50,34 @@
 # define DOOR_CLOSE		sprites[3]
 # define POTION			sprites[4]
 # define PLAYER			sprites[5]
+# define SPRITE_WIDTH	32
+# define SPRITE_HEIGHT	32
 
 typedef struct s_sprite
 {
 	void	*img;
 	char	*path;
+	char	*addr;
 	int		width;
 	int		height;
-}			t_sprite;
-
-//? pas sur du besoin
-/* typedef struct s_imgs
-{
-	void	*mlx_img;
-	char	*addr;
 	int		bpp;
 	int		size_line;
 	int		endian;
-}			t_imgs; */
+}			t_sprite;
 
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
-	// t_imgs	img;
-	t_sprite	sprites[6];
 	char		**map;
+	t_sprite	sprites[6];
 }				t_game;
 
 int		ft_escape_to_quit(int key, t_game *game);
 int		ft_end_game(t_game *game);
 int		ft_render(t_game *game);
 void	ft_load_sprites(t_game *game);
+void	ft_print_map(t_game *game);
 char	**ft_load_map(int fdmap);
 char	**ft_add_line(char **old_map, char *new_line);
 
