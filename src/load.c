@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:33:17 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/13 11:02:20 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:52:07 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,40 +44,18 @@ void	ft_load_sprites(t_game *game)
 	game->PLAYER = ft_sprite_init(game, PATH_PLAYER);
 }
 
-char	**ft_load_map(int fdmap)
+t_map	ft_load_map(int fdmap)
 {
-	char	**map;
+	t_map	map_data;
 	char	*line;
 
-	map = NULL;
+	map_data.map = NULL;
 	line = get_next_line(fdmap);
 	while (line)
 	{
-		map = ft_add_line(map, line);
+		map_data.map = ft_add_line(map_data.map, line);
 		line = get_next_line(fdmap);
 	}
-	return (map);
+	return (map_data);
 }
 
-void	ft_print_map(t_game *game)
-{
-	int	row;
-	int	col;
-
-	if (!game->win)
-		return ;
-	row = 0;
-	while (game->map[row])
-	{
-		col = 0;
-		while (game->map[row][col])
-		{
-			if (game->map[row][col] == 1)
-				mlx_put_image_to_window(game->mlx, game->win, game->WALL.img,
-										(row * SPRITE_HEIGHT),
-										(col * SPRITE_WIDTH));
-			col++;
-		}
-		row++;
-	}
-}

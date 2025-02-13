@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:47:56 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/13 13:06:06 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:53:00 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,37 @@ char **ft_add_line(char **old_map, char *new_line)
 	new_map[i] = new_line;
 	new_map[i + 1] = NULL;
 	return (ft_clear_map(old_map), new_map);
+}
+
+void	ft_swap(char *a, char *b)
+{
+	char	tmp;
+
+	tmp = *b;
+	*b = *a;
+	*a = tmp;
+}
+
+t_pos	ft_get_pos(t_map *map_data, char what)
+{
+	int		row;
+	int		col;
+	t_pos	pos;
+
+	row = 0;
+	while (map_data->map[row])
+	{
+		col = 0;
+		while (map_data->map[row][col])
+		{
+			if (map_data->map[row][col] == what)
+			{
+				pos.x = col;
+				pos.y = row;
+			}
+			col++;
+		}
+		row++;
+	}
+	return (pos);
 }

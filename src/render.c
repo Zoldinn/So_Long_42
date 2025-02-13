@@ -6,17 +6,45 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:24 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/13 10:59:47 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:40:01 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+void	ft_put_image(t_game *game, char where, void *sprite)
+{
+	int	row;
+	int	col;
+
+	if (!game->win)
+		return ;
+	row = 0;
+	while (game->map_data.map[row])
+	{
+		col = 0;
+		while (game->map_data.map[row][col])
+		{
+			if (game->map_data.map[row][col] == where)
+				mlx_put_image_to_window(game->mlx, game->win, sprite,
+										(col * SPRITE_WIDTH),
+										(row * SPRITE_HEIGHT));
+			col++;
+		}
+		row++;
+	}
+}
+
 int	ft_render(t_game *game)
 {
 	if (game->win == NULL)
 		return (FAIL);
-	ft_print_map(game);
+	ft_put_image(game, '1', game->WALL.img);
+	ft_put_image(game, '0', game->GROUND.img);
+	ft_put_image(game, 'P', game->PLAYER.img);
+	ft_put_image(game, 'C', game->POTION.img);
+	ft_put_image(game, 'E', game->DOOR_CLOSE.img);
+
 	return (OK);
 }
 

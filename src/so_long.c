@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:19 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/13 10:59:53 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:51:40 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ int	main(int ac, char **av)
 	if (game.win == NULL)
 		return (free(game.mlx), EXIT_FAILURE);
 
-	game.map = ft_load_map(open(av[1], O_RDONLY));
+	game.map_data = ft_load_map(open(av[1], O_RDONLY));
 	ft_load_sprites(&game);
-	ft_render(&game);
+	mlx_loop_hook(game.mlx, &ft_render, &game);
 
-	mlx_key_hook(game.win, &ft_escape_to_quit, &game);
+	mlx_key_hook(game.win, &ft_move, &game);
+	mlx_hook(game.win, KeyPress, KeyPressMask, &ft_escape_to_quit, &game);
+	mlx_hook(game.win, DestroyNotify, StructureNotifyMask, &ft_end_game, &game);
+
 	mlx_loop(game.mlx);
 	ft_end_game(&game);
 }

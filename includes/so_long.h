@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/13 10:19:30 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/13 17:52:59 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,12 @@
 # define SPRITE_WIDTH	32
 # define SPRITE_HEIGHT	32
 
+typedef struct s_pos
+{
+	int				x;
+	int				y;
+}					t_pos;
+
 typedef struct s_sprite
 {
 	void	*img;
@@ -65,20 +71,30 @@ typedef struct s_sprite
 	int		endian;
 }			t_sprite;
 
+typedef struct s_map
+{
+	char	**map;
+	int		width;
+	int		height;
+	t_pos	player;
+}			t_map;
+
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
-	char		**map;
+	t_map		map_data;
 	t_sprite	sprites[6];
 }				t_game;
 
 int		ft_escape_to_quit(int key, t_game *game);
+int		ft_move(int key, t_game *game);
 int		ft_end_game(t_game *game);
 int		ft_render(t_game *game);
 void	ft_load_sprites(t_game *game);
-void	ft_print_map(t_game *game);
-char	**ft_load_map(int fdmap);
+t_map	ft_load_map(int fdmap);
 char	**ft_add_line(char **old_map, char *new_line);
+t_pos	ft_get_pos(t_map *map_data, char what);
+void	ft_swap(char *a, char *b);
 
 #endif
