@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:27 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/14 11:32:30 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:46:19 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,7 @@
 int	ft_escape_to_quit(int key, t_game *game)
 {
 	if (key == ESCAPE)
-	{
-		mlx_destroy_window(game->mlx, game->win);
-		game->win = NULL;
 		ft_end_game(game);
-	}
 	return (OK);
 }
 
@@ -43,7 +39,6 @@ int	ft_move(int key, t_game *game)
 	t_pos	pos_player;
 	char	**map;
 
-	// game->map_data.player = ft_get_pos(&game->map_data, 'P');
 	ft_get_map_data(&game->map_data);
 	pos_player = game->map_data.player;
 	map = game->map_data.map;

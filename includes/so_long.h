@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/14 10:56:41 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:43:39 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ t_map	ft_load_map(int fdmap);
 char	**ft_add_line(char **old_map, char *new_line);
 void	ft_swap(char *a, char *b);
 void	ft_get_map_data(t_map *map_data);
+void	ft_clear_map(char **map);
 
 #endif

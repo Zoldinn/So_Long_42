@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:19 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/13 17:51:40 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:46:23 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int	ft_end_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->POTION.img);
 	if (game->PLAYER.img)
 		mlx_destroy_image(game->mlx, game->PLAYER.img);
+	ft_clear_map(game->map_data.map);
+	mlx_destroy_window(game->mlx, game->win);
+	game->win = NULL;
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);
 	exit(EXIT_SUCCESS);
