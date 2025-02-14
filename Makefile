@@ -10,7 +10,7 @@ DIR_LIBFT = $(DIR_INCLUDES)/libft
 DIR_GNL = $(DIR_INCLUDES)/gnl
 DIR_MLX = $(DIR_INCLUDES)/mlx
 
-SRC = $(addprefix $(DIR_SRC)/, so_long.c load.c utils.c key_hooks.c render.c)
+SRC = $(addprefix $(DIR_SRC)/, so_long.c load.c utils.c key_hooks.c render.c check_map.c)
 OBJ = $(addprefix $(DIR_OBJ)/, $(notdir $(SRC:.c=.o)))
 
 PRINTF = $(DIR_PRINTF)/libftprintf.a

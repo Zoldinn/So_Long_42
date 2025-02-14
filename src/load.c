@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:33:17 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/14 10:56:39 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/14 13:32:16 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_map	ft_load_map(int fdmap)
 		map_data.map = ft_add_line(map_data.map, line);
 		line = get_next_line(fdmap);
 	}
-	// map_data.potions_count = ft_get_nb_potions(&map_data);
 	ft_get_map_data(&map_data);
 	return (map_data);
 }

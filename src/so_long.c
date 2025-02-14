@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:19 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/14 11:46:23 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:47:46 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,36 @@ int	ft_end_game(t_game *game)
 	exit(EXIT_SUCCESS);
 }
 
+void	ft_get_window_size(t_map *map_data)
+{
+	map_data->height = 0;
+	while (map_data->map[map_data->height])
+	{
+		map_data->width = 0;
+		while (map_data->map[map_data->height][map_data->width])
+			map_data->width += 1;
+		map_data->height += 1;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_game	game;
 
 	if (ac != 2)
 		return (write(2, "Enter the path of the map only\n", 31), FAIL);
+
+	game.map_data = ft_load_map(open(av[1], O_RDONLY));
+	ft_get_window_size(&game.map_data);
+
 	game.mlx = mlx_init();
 	if (game.mlx == NULL)
 		return (EXIT_FAILURE);
-	game.win = mlx_new_window(game.mlx, 1920, 1080, "So_Long");
+	game.win = mlx_new_window(game.mlx, game.map_data.width * 32,
+							game.map_data.height * 32, "So_Long");
 	if (game.win == NULL)
 		return (free(game.mlx), EXIT_FAILURE);
 
-	game.map_data = ft_load_map(open(av[1], O_RDONLY));
 	ft_load_sprites(&game);
 	mlx_loop_hook(game.mlx, &ft_render, &game);
 

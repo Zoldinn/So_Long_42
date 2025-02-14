@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/14 11:43:39 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:25:28 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,16 @@
 //* more readable
 # define FAIL			1
 # define OK				0
-//* colors
-# define WHITE			0xFFFFFF
-# define RED			0xFF0000
-# define GREEN			0xFF00
-# define BLUE			0xFF
-//* window
-# define WIDTH			1920
-# define HEIGHT			1080
 //* keys code
 # define ESCAPE			65307
-# define KEY_LEFT		65361
-# define KEY_RIGHT		65363
-# define KEY_UP			65362
-# define KEY_DOWN		65364
+# define LEFT			65361
+# define RIGHT			65363
+# define UP				65362
+# define DOWN			65364
+# define W				119
+# define A				97
+# define S				115
+# define D				100
 //* sprites path
 # define PATH_GROUND	"sprites/ground1.xpm"
 # define PATH_WALL		"sprites/wall_top_view.xpm"
@@ -92,11 +88,13 @@ int		ft_escape_to_quit(int key, t_game *game);
 int		ft_move(int key, t_game *game);
 int		ft_end_game(t_game *game);
 int		ft_render(t_game *game);
+int		ft_check_map(t_map *map_data);
 void	ft_load_sprites(t_game *game);
 t_map	ft_load_map(int fdmap);
 char	**ft_add_line(char **old_map, char *new_line);
 void	ft_swap(char *a, char *b);
 void	ft_get_map_data(t_map *map_data);
 void	ft_clear_map(char **map);
+void	ft_get_window_size(t_map *map_data);
 
 #endif

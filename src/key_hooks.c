@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:27 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/14 11:46:19 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/14 13:36:23 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ int	ft_escape_to_quit(int key, t_game *game)
 // A function complementary for ft_move
 void	ft_whats_dest(t_game *game, char *player, char *dest)
 {
+	int	nb_moves;
+
+	nb_moves = 0;
 	if (*dest != 'C' && *dest != 'E' && *dest != '1')
+	{
 		ft_swap(player, dest);
+		ft_printf("moves : %d\n", ++nb_moves);
+	}
 	else if (*dest == 'C')
 	{
 		*player = '0';
@@ -36,23 +42,23 @@ void	ft_whats_dest(t_game *game, char *player, char *dest)
 
 int	ft_move(int key, t_game *game)
 {
-	t_pos	pos_player;
+	t_pos	player;
 	char	**map;
 
 	ft_get_map_data(&game->map_data);
-	pos_player = game->map_data.player;
+	player = game->map_data.player;
 	map = game->map_data.map;
-	if (key == KEY_UP && map[pos_player.y - 1][pos_player.x] != '1')
-		ft_whats_dest(game, &map[pos_player.y][pos_player.x],
-					&map[pos_player.y - 1][pos_player.x]);
-	else if (key == KEY_DOWN && map[pos_player.y + 1][pos_player.x] != '1')
-		ft_whats_dest(game, &map[pos_player.y][pos_player.x],
-				&map[pos_player.y + 1][pos_player.x]);
-	else if (key == KEY_LEFT && map[pos_player.y][pos_player.x - 1] != '1')
-	ft_whats_dest(game, &map[pos_player.y][pos_player.x],
-				&map[pos_player.y][pos_player.x - 1]);
-	else if (key == KEY_RIGHT && map[pos_player.y][pos_player.x + 1] != '1')
-	ft_whats_dest(game, &map[pos_player.y][pos_player.x],
-				&map[pos_player.y][pos_player.x + 1]);
+	if ((key == W || key == UP) && map[player.y - 1][player.x] != '1')
+		ft_whats_dest(game, &map[player.y][player.x],
+					&map[player.y - 1][player.x]);
+	else if ((key == S || key == DOWN) && map[player.y + 1][player.x] != '1')
+		ft_whats_dest(game, &map[player.y][player.x],
+				&map[player.y + 1][player.x]);
+	else if ((key == A || key == LEFT) && map[player.y][player.x - 1] != '1')
+	ft_whats_dest(game, &map[player.y][player.x],
+				&map[player.y][player.x - 1]);
+	else if ((key == D || key == RIGHT) && map[player.y][player.x + 1] != '1')
+	ft_whats_dest(game, &map[player.y][player.x],
+				&map[player.y][player.x + 1]);
 	return (OK);
 }
