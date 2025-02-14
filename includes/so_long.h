@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/13 17:52:59 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/14 10:56:41 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_map
 	int		width;
 	int		height;
 	t_pos	player;
+	int		potions_count;
 }			t_map;
 
 typedef struct s_game
@@ -94,7 +95,7 @@ int		ft_render(t_game *game);
 void	ft_load_sprites(t_game *game);
 t_map	ft_load_map(int fdmap);
 char	**ft_add_line(char **old_map, char *new_line);
-t_pos	ft_get_pos(t_map *map_data, char what);
 void	ft_swap(char *a, char *b);
+void	ft_get_map_data(t_map *map_data);
 
 #endif

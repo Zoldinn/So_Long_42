@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:47:56 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/13 17:53:00 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:03:50 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char **ft_add_line(char **old_map, char *new_line)
 	return (ft_clear_map(old_map), new_map);
 }
 
+// to move player
 void	ft_swap(char *a, char *b)
 {
 	char	tmp;
@@ -61,26 +62,28 @@ void	ft_swap(char *a, char *b)
 	*a = tmp;
 }
 
-t_pos	ft_get_pos(t_map *map_data, char what)
+//* Get the player's pos and count of potions
+void	ft_get_map_data(t_map *map_data)
 {
-	int		row;
-	int		col;
-	t_pos	pos;
+	int	row;
+	int	col;
 
+	map_data->potions_count = 0;
 	row = 0;
 	while (map_data->map[row])
 	{
 		col = 0;
 		while (map_data->map[row][col])
 		{
-			if (map_data->map[row][col] == what)
+			if (map_data->map[row][col] == 'C')
+				map_data->potions_count += 1;
+			if (map_data->map[row][col] == 'P')
 			{
-				pos.x = col;
-				pos.y = row;
+				map_data->player.x = col;
+				map_data->player.y = row;
 			}
 			col++;
 		}
 		row++;
 	}
-	return (pos);
 }
