@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:49:07 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/17 16:02:08 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:52:32 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,18 @@ int	ft_check_map(t_map *map_data)
 	map_data->check.cpy_map = ft_copy_map(map_data->map);
 	if (ft_is_map_rect(map_data) == FAIL || ft_is_border_wall(map_data) == FAIL
 		|| ft_count_player(map_data) != 1)
+	{
+		ft_clear_map(map_data->check.cpy_map);
+		write(2, "\e[31mError by map\e[0m\n", 22);
 		return (FAIL);
+	}
 	ft_flood_fill(map_data, map_data->player.y, map_data->player.x);
 	if (map_data->potions_count != map_data->check.count_potion
 		|| map_data->check.count_exit == 0)
+	{
+		ft_clear_map(map_data->check.cpy_map);
+		write(2, "\e[31mError by map\e[0m\n", 22);
 		return (FAIL);
-	return (OK);
+	}
+	return (ft_clear_map(map_data->check.cpy_map), OK);
 }

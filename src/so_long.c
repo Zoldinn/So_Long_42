@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:19 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/17 15:21:17 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:17:33 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ int	main(int ac, char **av)
 	game.map_data = ft_load_map(open(av[1], O_RDONLY));
 	ft_get_window_size(&game.map_data);
 	if (ft_check_map(&game.map_data) == FAIL)
-		ft_end_game(&game);
+		return (ft_clear_map(game.map_data.map), FAIL);
 
 	game.mlx = mlx_init();
 	if (game.mlx == NULL)
 		return (EXIT_FAILURE);
 	game.win = mlx_new_window(game.mlx, game.map_data.width * 32,
-							game.map_data.height * 32, "So_Long");
+		game.map_data.height * 32, "So_Long");
 	if (game.win == NULL)
 		return (free(game.mlx), EXIT_FAILURE);
 

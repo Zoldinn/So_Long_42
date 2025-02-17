@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:47:56 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/17 13:12:47 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:47:23 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	ft_clear_map(char **map)
 	i = 0;
 	while (map[i])
 		free(map[i++]);
-	free(map);
+	if (map)
+		free(map);
 }
 
 //* Kind of realloc to add a new line to map (char**)
@@ -68,6 +69,8 @@ void	ft_get_map_data(t_map *map_data)
 	int	row;
 	int	col;
 
+	if (!map_data->map)
+		return ;
 	map_data->potions_count = 0;
 	row = 0;
 	while (map_data->map[row])
@@ -102,6 +105,6 @@ char	**ft_copy_map(char **map)
 	row = -1;
 	while (map[++row])
 		cpy[row] = ft_strdup(map[row]);
-	map[row] = NULL;
+	cpy[row] = NULL;
 	return (cpy);
 }
