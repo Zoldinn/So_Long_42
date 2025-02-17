@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/14 14:25:28 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:56:56 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@
 # define SPRITE_WIDTH	32
 # define SPRITE_HEIGHT	32
 
+typedef struct s_check
+{
+	int		count_potion;
+	int		count_player;
+	int		count_exit;
+	char	**cpy_map;
+}		t_check;
+
 typedef struct s_pos
 {
 	int				x;
@@ -74,6 +82,7 @@ typedef struct s_map
 	int		height;
 	t_pos	player;
 	int		potions_count;
+	t_check	check;
 }			t_map;
 
 typedef struct s_game
@@ -96,5 +105,7 @@ void	ft_swap(char *a, char *b);
 void	ft_get_map_data(t_map *map_data);
 void	ft_clear_map(char **map);
 void	ft_get_window_size(t_map *map_data);
+char	**ft_copy_map(char **map);
+int		ft_check_map(t_map *map_data);
 
 #endif

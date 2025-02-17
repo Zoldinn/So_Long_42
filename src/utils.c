@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:47:56 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/14 13:50:02 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:12:47 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,22 @@ void	ft_get_map_data(t_map *map_data)
 		}
 		row++;
 	}
+}
+
+char	**ft_copy_map(char **map)
+{
+	char	**cpy;
+	int		row;
+
+	row = 0;
+	while (map[row])
+		row++;
+	cpy = malloc(sizeof(char **) * ++row);
+	if (!cpy)
+		return (NULL);
+	row = -1;
+	while (map[++row])
+		cpy[row] = ft_strdup(map[row]);
+	map[row] = NULL;
+	return (cpy);
 }
