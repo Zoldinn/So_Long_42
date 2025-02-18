@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:33:17 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/14 13:32:16 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:33:09 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,20 @@ void	ft_load_sprites(t_game *game)
 
 t_map	ft_load_map(int fdmap)
 {
-	t_map	map_data;
+	t_map	datamap;
 	char	*line;
+	char	**map;
 
-	map_data.map = NULL;
+	datamap.map = NULL;
+	map = datamap.map;
 	line = get_next_line(fdmap);
 	while (line)
 	{
-		map_data.map = ft_add_line(map_data.map, line);
+		map = ft_add_line(map, line);
 		line = get_next_line(fdmap);
 	}
-	ft_get_map_data(&map_data);
-	return (map_data);
+	ft_get_datamap(&datamap);
+	map[datamap.height - 1][datamap.width] = '\0';
+	return (datamap);
 }
 

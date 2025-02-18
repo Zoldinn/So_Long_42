@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:47:56 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/17 17:47:23 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:26:15 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,31 +63,28 @@ void	ft_swap(char *a, char *b)
 	*a = tmp;
 }
 
-//* Get the player's pos and count of potions
-void	ft_get_map_data(t_map *map_data)
+//* Get the player's pos, count of potions, map size
+void	ft_get_datamap(t_map *datamap)
 {
-	int	row;
-	int	col;
-
-	if (!map_data->map)
+	if (!datamap->map)
 		return ;
-	map_data->potions_count = 0;
-	row = 0;
-	while (map_data->map[row])
+	datamap->potions_count = 0;
+	datamap->height = 0;
+	while (datamap->map[datamap->height])
 	{
-		col = 0;
-		while (map_data->map[row][col])
+		datamap->width = 0;
+		while (datamap->map[datamap->height][datamap->width])
 		{
-			if (map_data->map[row][col] == 'C')
-				map_data->potions_count += 1;
-			if (map_data->map[row][col] == 'P')
+			if (datamap->map[datamap->height][datamap->width] == 'C')
+				datamap->potions_count += 1;
+			if (datamap->map[datamap->height][datamap->width] == 'P')
 			{
-				map_data->player.x = col;
-				map_data->player.y = row;
+				datamap->player.x = datamap->width;
+				datamap->player.y = datamap->height;
 			}
-			col++;
+			datamap->width++;
 		}
-		row++;
+		datamap->height++;
 	}
 }
 

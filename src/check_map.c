@@ -6,13 +6,13 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:49:07 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/17 17:52:32 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:20:23 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	ft_count_player(t_map *map_data)
+int	ft_count_player(t_map *datamap)
 {
 	int	r;
 	int	c;
@@ -20,12 +20,12 @@ int	ft_count_player(t_map *map_data)
 
 	count = 0;
 	r = 0;
-	while (map_data->map[r])
+	while (datamap->map[r])
 	{
 		c = 0;
-		while (map_data->map[r][c])
+		while (datamap->map[r][c])
 		{
-			if (map_data->map[r][c] == 'P')
+			if (datamap->map[r][c] == 'P')
 				count++;
 			c++;
 		}
@@ -34,39 +34,37 @@ int	ft_count_player(t_map *map_data)
 	return (count);
 }
 
-int	ft_is_map_rect(t_map *map_data)
+int	ft_is_map_rect(t_map *datamap)
 {
-	int	size;
-	int	tmp;
-	int	i;
+	size_t	size;
+	int		i;
 
 	i = 0;
-	size = ft_strlen(map_data->map[i]);
-	while (map_data->map[++i])
+	size = ft_strlen(datamap->map[i]);
+	ft_printf("Line 1 size = %d\n", size);
+	while (datamap->map[++i])
 	{
-		tmp = size;
-		size = ft_strlen(map_data->map[i]);
-		if (tmp != size)
-			return (FAIL);
+		ft_printf("Line %d size = %d\n", i + 1, ft_strlen(datamap->map[i]));
+		if (size != ft_strlen(datamap->map[i]))
+			return (ft_printf("\nError rect\n"), FAIL);
 	}
 	return (OK);
 }
 
-int	ft_is_border_wall(t_map *map_data)
+int	ft_is_border_wall(t_map *datamap)
 {
 	int	r;
 	int	c;
 
 	r = 0;
-	while (map_data->map[r])
+	while (datamap->map[r])
 	{
 		c = 0;
-		while (map_data->map[r][c])
+		while (datamap->map[r][c])
 		{
-			if ((r == 0 || r == map_data->height - 1
-				|| c == 0 || c == map_data->width - 1)
-				&& map_data->map[r][c] != 1)
-				return (FAIL);
+			if ((r == 0 || r == datamap->height - 1 || c == 0
+				|| c == datamap->width - 1) && datamap->map[r][c] != 1)
+				return (ft_printf("\nError Border\n"), FAIL);
 			c++;
 		}
 		r++;
@@ -74,44 +72,44 @@ int	ft_is_border_wall(t_map *map_data)
 	return (OK);
 }
 
-void	ft_flood_fill(t_map *map_data, int row, int col)
+void	ft_flood_fill(t_map *datamap, int row, int col)
 {
-	if (row < 0 || row > map_data->height || col < 0 || col > map_data->width)
+	if (row < 0 || row > datamap->height || col < 0 || col > datamap->width)
 		return ;
-	if (map_data->check.cpy_map[row][col] == '1'
-		|| map_data->check.cpy_map[row][col] == 'f')
+	if (datamap->check.cpy_map[row][col] == '1'
+		|| datamap->check.cpy_map[row][col] == 'f')
 		return ;
-	if (map_data->check.cpy_map[row][col] == 'C')
-		map_data->check.count_potion++;
-	if (map_data->check.cpy_map[row][col] == 'E')
-		map_data->check.count_exit = 1;
-	map_data->check.cpy_map[row][col] = 'f';
-	ft_flood_fill(map_data, row + 1, col);
-	ft_flood_fill(map_data, row - 1, col);
-	ft_flood_fill(map_data, row, col + 1);
-	ft_flood_fill(map_data, row, col - 1);
+	if (datamap->check.cpy_map[row][col] == 'C')
+		datamap->check.count_potion++;
+	if (datamap->check.cpy_map[row][col] == 'E')
+		datamap->check.count_exit = 1;
+	datamap->check.cpy_map[row][col] = 'f';
+	ft_flood_fill(datamap, row + 1, col);
+	ft_flood_fill(datamap, row - 1, col);
+	ft_flood_fill(datamap, row, col + 1);
+	ft_flood_fill(datamap, row, col - 1);
 }
 
-int	ft_check_map(t_map *map_data)
+int	ft_check_map(t_map *datamap)
 {
-	map_data->check.count_potion = 0;
-	map_data->check.count_player = 0;
-	map_data->check.count_exit = 0;
-	map_data->check.cpy_map = ft_copy_map(map_data->map);
-	if (ft_is_map_rect(map_data) == FAIL || ft_is_border_wall(map_data) == FAIL
-		|| ft_count_player(map_data) != 1)
+	datamap->check.count_potion = 0;
+	datamap->check.count_player = 0;
+	datamap->check.count_exit = 0;
+	datamap->check.cpy_map = ft_copy_map(datamap->map);
+	if (ft_count_player(datamap) != 1 || ft_is_map_rect(datamap) == FAIL
+		|| ft_is_border_wall(datamap) == FAIL)
 	{
-		ft_clear_map(map_data->check.cpy_map);
+		ft_clear_map(datamap->check.cpy_map);
 		write(2, "\e[31mError by map\e[0m\n", 22);
 		return (FAIL);
 	}
-	ft_flood_fill(map_data, map_data->player.y, map_data->player.x);
-	if (map_data->potions_count != map_data->check.count_potion
-		|| map_data->check.count_exit == 0)
+	ft_flood_fill(datamap, datamap->player.y, datamap->player.x);
+	if (datamap->potions_count != datamap->check.count_potion
+		|| datamap->check.count_exit == 0)
 	{
-		ft_clear_map(map_data->check.cpy_map);
-		write(2, "\e[31mError by map\e[0m\n", 22);
+		ft_clear_map(datamap->check.cpy_map);
+		write(2, "\e[31mError by map (flood fill)\e[0m\n", 22);
 		return (FAIL);
 	}
-	return (ft_clear_map(map_data->check.cpy_map), OK);
+	return (ft_clear_map(datamap->check.cpy_map), OK);
 }

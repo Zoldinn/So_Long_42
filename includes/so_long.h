@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/17 14:56:56 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:26:43 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
-	t_map		map_data;
+	t_map		datamap;
 	t_sprite	sprites[6];
 }				t_game;
 
@@ -97,15 +97,14 @@ int		ft_escape_to_quit(int key, t_game *game);
 int		ft_move(int key, t_game *game);
 int		ft_end_game(t_game *game);
 int		ft_render(t_game *game);
-int		ft_check_map(t_map *map_data);
+int		ft_check_map(t_map *datamap);
 void	ft_load_sprites(t_game *game);
 t_map	ft_load_map(int fdmap);
 char	**ft_add_line(char **old_map, char *new_line);
 void	ft_swap(char *a, char *b);
-void	ft_get_map_data(t_map *map_data);
+void	ft_get_datamap(t_map *datamap);
 void	ft_clear_map(char **map);
-void	ft_get_window_size(t_map *map_data);
 char	**ft_copy_map(char **map);
-int		ft_check_map(t_map *map_data);
+int		ft_check_map(t_map *datamap);
 
 #endif

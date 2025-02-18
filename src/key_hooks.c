@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:27 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/14 13:36:23 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:20:22 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	ft_whats_dest(t_game *game, char *player, char *dest)
 	{
 		*player = '0';
 		*dest = 'P';
-		game->map_data.potions_count -= 1;
+		game->datamap.potions_count -= 1;
 	}
-	else if (*dest == 'E' && game->map_data.potions_count == 0)
+	else if (*dest == 'E' && game->datamap.potions_count == 0)
 		ft_end_game(game);
 }
 
@@ -45,9 +45,9 @@ int	ft_move(int key, t_game *game)
 	t_pos	player;
 	char	**map;
 
-	ft_get_map_data(&game->map_data);
-	player = game->map_data.player;
-	map = game->map_data.map;
+	ft_get_datamap(&game->datamap);
+	player = game->datamap.player;
+	map = game->datamap.map;
 	if ((key == W || key == UP) && map[player.y - 1][player.x] != '1')
 		ft_whats_dest(game, &map[player.y][player.x],
 					&map[player.y - 1][player.x]);

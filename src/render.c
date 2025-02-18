@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:24 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/14 11:22:15 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:20:16 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	ft_put_image(t_game *game, char where, void *sprite)
 	if (!game->win)
 		return ;
 	row = 0;
-	while (game->map_data.map[row])
+	while (game->datamap.map[row])
 	{
 		col = 0;
-		while (game->map_data.map[row][col])
+		while (game->datamap.map[row][col])
 		{
-			if (game->map_data.map[row][col] == where)
+			if (game->datamap.map[row][col] == where)
 				mlx_put_image_to_window(game->mlx, game->win, sprite,
 										(col * SPRITE_WIDTH),
 										(row * SPRITE_HEIGHT));
@@ -43,7 +43,7 @@ int	ft_render(t_game *game)
 	ft_put_image(game, '0', game->GROUND.img);
 	ft_put_image(game, 'P', game->PLAYER.img);
 	ft_put_image(game, 'C', game->POTION.img);
-	if (game->map_data.potions_count != 0)
+	if (game->datamap.potions_count != 0)
 		ft_put_image(game, 'E', game->DOOR_CLOSE.img);
 	else
 		ft_put_image(game, 'E', game->DOOR_OPEN.img);
