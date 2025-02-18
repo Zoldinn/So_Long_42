@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/18 15:26:43 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:25:13 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct s_game
 	void		*win;
 	t_map		datamap;
 	t_sprite	sprites[6];
+	int			nb_moves;
 }				t_game;
 
 int		ft_escape_to_quit(int key, t_game *game);

@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:27 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/18 15:20:22 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:13:45 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,10 @@ int	ft_escape_to_quit(int key, t_game *game)
 // A function complementary for ft_move
 void	ft_whats_dest(t_game *game, char *player, char *dest)
 {
-	int	nb_moves;
-
-	nb_moves = 0;
 	if (*dest != 'C' && *dest != 'E' && *dest != '1')
 	{
 		ft_swap(player, dest);
-		ft_printf("moves : %d\n", ++nb_moves);
+		ft_printf("moves : %d\n", ++game->nb_moves);
 	}
 	else if (*dest == 'C')
 	{

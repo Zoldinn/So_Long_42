@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:19 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/18 15:26:50 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:14:23 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	main(int ac, char **av)
 		game.datamap.height * 32, "So_Long");
 	if (game.win == NULL)
 		return (free(game.mlx), EXIT_FAILURE);
-
+	game.nb_moves = 0;
 	ft_load_sprites(&game);
 	mlx_loop_hook(game.mlx, &ft_render, &game);
 

@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:33:17 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/18 15:33:09 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:15:46 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,17 @@ t_map	ft_load_map(int fdmap)
 {
 	t_map	datamap;
 	char	*line;
-	char	**map;
 
 	datamap.map = NULL;
-	map = datamap.map;
 	line = get_next_line(fdmap);
 	while (line)
 	{
-		map = ft_add_line(map, line);
+		if (line[ft_strlen(line) - 1] == '\n')
+			line[ft_strlen(line) - 1] = '\0';
+		datamap.map = ft_add_line(datamap.map, line);
 		line = get_next_line(fdmap);
 	}
 	ft_get_datamap(&datamap);
-	map[datamap.height - 1][datamap.width] = '\0';
 	return (datamap);
 }
 

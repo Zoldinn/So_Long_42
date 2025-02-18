@@ -6,12 +6,13 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:49:07 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/18 15:20:23 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:05:09 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+// count le nombre de joueur
 int	ft_count_player(t_map *datamap)
 {
 	int	r;
@@ -34,6 +35,7 @@ int	ft_count_player(t_map *datamap)
 	return (count);
 }
 
+// check si la map est rectangulaire
 int	ft_is_map_rect(t_map *datamap)
 {
 	size_t	size;
@@ -51,6 +53,7 @@ int	ft_is_map_rect(t_map *datamap)
 	return (OK);
 }
 
+// check si la map est entourée de murs
 int	ft_is_border_wall(t_map *datamap)
 {
 	int	r;
@@ -62,8 +65,9 @@ int	ft_is_border_wall(t_map *datamap)
 		c = 0;
 		while (datamap->map[r][c])
 		{
-			if ((r == 0 || r == datamap->height - 1 || c == 0
-				|| c == datamap->width - 1) && datamap->map[r][c] != 1)
+			if ((r == 0 || r == datamap->height - 1
+				|| c == 0 || c == datamap->width - 1)
+				&& datamap->map[r][c] != '1')
 				return (ft_printf("\nError Border\n"), FAIL);
 			c++;
 		}
@@ -71,6 +75,7 @@ int	ft_is_border_wall(t_map *datamap)
 	}
 	return (OK);
 }
+
 
 void	ft_flood_fill(t_map *datamap, int row, int col)
 {
@@ -90,6 +95,7 @@ void	ft_flood_fill(t_map *datamap, int row, int col)
 	ft_flood_fill(datamap, row, col - 1);
 }
 
+// check si la map est valide
 int	ft_check_map(t_map *datamap)
 {
 	datamap->check.count_potion = 0;
@@ -108,8 +114,15 @@ int	ft_check_map(t_map *datamap)
 		|| datamap->check.count_exit == 0)
 	{
 		ft_clear_map(datamap->check.cpy_map);
-		write(2, "\e[31mError by map (flood fill)\e[0m\n", 22);
+		write(2, "\e[31mError by map (flood fill)\e[0m\n", 35);
 		return (FAIL);
 	}
 	return (ft_clear_map(datamap->check.cpy_map), OK);
 }
+
+/*
+plusieurs joueurs
+plusieurs exit
+aucun collectible
+porte qui bloque l'acces a des collectibles
+*/
