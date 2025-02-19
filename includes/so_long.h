@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/18 17:25:13 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:35:33 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,6 @@
 # define PATH_POTION	"sprites/potion.xpm"
 # define PATH_PLAYER	"sprites/player.xpm"
 //* sprites
-# define GROUND			sprites[0]
-# define WALL			sprites[1]
-# define DOOR_OPEN		sprites[2]
-# define DOOR_CLOSE		sprites[3]
-# define POTION			sprites[4]
-# define PLAYER			sprites[5]
 # define SPRITE_WIDTH	32
 # define SPRITE_HEIGHT	32
 

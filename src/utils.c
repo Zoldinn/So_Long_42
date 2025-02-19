@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:47:56 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/18 15:26:15 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:23:26 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_clear_map(char **map)
 }
 
 //* Kind of realloc to add a new line to map (char**)
-char **ft_add_line(char **old_map, char *new_line)
+char	**ft_add_line(char **old_map, char *new_line)
 {
 	char	**new_map;
 	int		count_line;

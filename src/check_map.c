@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:49:07 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/19 18:05:05 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:24:40 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,8 @@ int	ft_is_border_wall(t_map *datamap)
 		c = 0;
 		while (datamap->map[r][c])
 		{
-			if ((r == 0 || r == datamap->height - 1
-				|| c == 0 || c == datamap->width - 1)
-				&& datamap->map[r][c] != '1')
+			if ((r == 0 || r == datamap->height - 1 || c == 0
+					|| c == datamap->width - 1) && datamap->map[r][c] != '1')
 				return (ft_perror("\nError Border\n"), FAIL);
 			c++;
 		}
@@ -125,10 +124,3 @@ int	ft_check_map(t_map *dtmap)
 	}
 	return (ft_clear_map(dtmap->check.cpy_map), OK);
 }
-
-/*
-plusieurs joueurs
-plusieurs exit
-aucun collectible
-porte qui bloque l'acces a des collectibles
-*/

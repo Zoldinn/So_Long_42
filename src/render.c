@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:24 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/18 15:20:16 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:29:36 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	ft_put_image(t_game *game, char where, void *sprite)
 		{
 			if (game->datamap.map[row][col] == where)
 				mlx_put_image_to_window(game->mlx, game->win, sprite,
-										(col * SPRITE_WIDTH),
-										(row * SPRITE_HEIGHT));
+					(col * SPRITE_WIDTH),
+					(row * SPRITE_HEIGHT));
 			col++;
 		}
 		row++;
@@ -49,4 +49,3 @@ int	ft_render(t_game *game)
 		ft_put_image(game, 'E', game->DOOR_OPEN.img);
 	return (OK);
 }
-

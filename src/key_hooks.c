@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:27 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/18 18:13:45 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:28:59 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	ft_escape_to_quit(int key, t_game *game)
 	return (OK);
 }
 
-// A function complementary for ft_move
-void	ft_whats_dest(t_game *game, char *player, char *dest)
+// To move or do depend on dest
+void	ft_dest(t_game *game, char *player, char *dest)
 {
 	if (*dest != 'C' && *dest != 'E' && *dest != '1')
 	{
@@ -46,16 +46,12 @@ int	ft_move(int key, t_game *game)
 	player = game->datamap.player;
 	map = game->datamap.map;
 	if ((key == W || key == UP) && map[player.y - 1][player.x] != '1')
-		ft_whats_dest(game, &map[player.y][player.x],
-					&map[player.y - 1][player.x]);
+		ft_dest(game, &map[player.y][player.x], &map[player.y - 1][player.x]);
 	else if ((key == S || key == DOWN) && map[player.y + 1][player.x] != '1')
-		ft_whats_dest(game, &map[player.y][player.x],
-				&map[player.y + 1][player.x]);
+		ft_dest(game, &map[player.y][player.x], &map[player.y + 1][player.x]);
 	else if ((key == A || key == LEFT) && map[player.y][player.x - 1] != '1')
-	ft_whats_dest(game, &map[player.y][player.x],
-				&map[player.y][player.x - 1]);
+		ft_dest(game, &map[player.y][player.x], &map[player.y][player.x - 1]);
 	else if ((key == D || key == RIGHT) && map[player.y][player.x + 1] != '1')
-	ft_whats_dest(game, &map[player.y][player.x],
-				&map[player.y][player.x + 1]);
+		ft_dest(game, &map[player.y][player.x], &map[player.y][player.x + 1]);
 	return (OK);
 }
