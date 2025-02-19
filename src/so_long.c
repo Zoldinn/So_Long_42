@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:19 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/18 18:14:23 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:15:29 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	if (ac != 2)
-		return (write(2, "Enter the path of the map only\n", 31), FAIL);
+		return (ft_perror("Enter the path of the map only\n"), FAIL);
 
 	game.datamap = ft_load_map(open(av[1], O_RDONLY));
 	if (ft_check_map(&game.datamap) == FAIL)
@@ -47,11 +47,11 @@ int	main(int ac, char **av)
 
 	game.mlx = mlx_init();
 	if (game.mlx == NULL)
-		return (EXIT_FAILURE);
-	game.win = mlx_new_window(game.mlx, game.datamap.width * 32,
-		game.datamap.height * 32, "So_Long");
+		return (ft_perror("Error : mlx init.\n"), EXIT_FAILURE);
+	game.win = mlx_new_window(game.mlx, game.datamap.width * SPRITE_WIDTH,
+		game.datamap.height * SPRITE_HEIGHT, "So_Long");
 	if (game.win == NULL)
-		return (free(game.mlx), EXIT_FAILURE);
+		return (free(game.mlx), ft_perror("Error : window init."), EXIT_FAILURE);
 	game.nb_moves = 0;
 	ft_load_sprites(&game);
 	mlx_loop_hook(game.mlx, &ft_render, &game);

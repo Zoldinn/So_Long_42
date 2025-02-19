@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 10:30:40 by lefoffan          #+#    #+#             */
-/*   Updated: 2024/11/26 11:18:58 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:09:55 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ int	ft_print_format(unsigned char format, va_list ap)
 		return (ft_putaddress(va_arg(ap, void *), &read));
 	else
 		return (ft_putchar('%'));
+}
+
+int	ft_perror(char *str)
+{
+	write(2, "\e[31m", 5);
+	write(2, str, ft_strlen(str));
+	write(2, "\e[0m", 4);
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
