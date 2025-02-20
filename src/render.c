@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:24 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/19 18:29:36 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/20 10:34:33 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	ft_render(t_game *game)
 {
 	if (game->win == NULL)
 		return (FAIL);
-	ft_put_image(game, '1', game->WALL.img);
-	ft_put_image(game, '0', game->GROUND.img);
-	ft_put_image(game, 'P', game->PLAYER.img);
-	ft_put_image(game, 'C', game->POTION.img);
+	ft_put_image(game, '1', game->sprites[1].img);
+	ft_put_image(game, '0', game->sprites[0].img);
+	ft_put_image(game, 'P', game->sprites[5].img);
+	ft_put_image(game, 'C', game->sprites[4].img);
 	if (game->datamap.potions_count != 0)
-		ft_put_image(game, 'E', game->DOOR_CLOSE.img);
+		ft_put_image(game, 'E', game->sprites[3].img);
 	else
-		ft_put_image(game, 'E', game->DOOR_OPEN.img);
+		ft_put_image(game, 'E', game->sprites[2].img);
 	return (OK);
 }

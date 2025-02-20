@@ -6,25 +6,54 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:19 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/19 18:34:30 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:22:31 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
+/**==============================================
+ * 			Check si la map est :
+ * 1. Rectangulaire.
+ * 2. Entourée de murs.
+ * 3. A un seul joueur.
+ * 4. A une seule sortie.
+ * 5. S'il y a, au moins une potion.
+ * 6. Si les potions sont accessibles.
+ *=============================================**/
+int	ft_check_map(t_map *datamap)
+{
+	t_map	cpy;
+
+	if (ft_is_map_rect(datamap) == FAIL || ft_is_border_wall(datamap) == FAIL)
+		return (FAIL);
+	if (ft_count(datamap->map, 'C') <= 0 || ft_count(datamap->map, 'P') != 1
+		|| ft_count(datamap->map, 'E') != 1)
+		return (ft_perror("There's not the good count (P, E or C)\n"), FAIL);
+	if (ft_check_another(datamap->map) == FAIL)
+		return (ft_perror("Must have only P, C, E, 1 or 0 on map\n"), FAIL);
+	cpy.height = datamap->height;
+	cpy.width = datamap->width;
+	cpy.map = ft_copy_map(datamap->map);
+	ft_flood_fill(&cpy, datamap->player.y, datamap->player.x);
+	if (ft_count(cpy.map, 'C') != 0)
+		return (ft_clear_map(cpy.map), ft_perror("Flood fill\n"), FAIL);
+	return (ft_clear_map(cpy.map), OK);
+}
+
 int	ft_end_game(t_game *game)
 {
-	if (game->GROUND.img)
+	if (game->sprites[0].img)
 		mlx_destroy_image(game->mlx, game->sprites[0].img);
-	if (game->WALL.img)
+	if (game->sprites[1].img)
 		mlx_destroy_image(game->mlx, game->sprites[1].img);
-	if (game->DOOR_OPEN.img)
+	if (game->sprites[2].img)
 		mlx_destroy_image(game->mlx, game->sprites[2].img);
-	if (game->DOOR_CLOSE.img)
+	if (game->sprites[3].img)
 		mlx_destroy_image(game->mlx, game->sprites[3].img);
-	if (game->POTION.img)
+	if (game->sprites[4].img)
 		mlx_destroy_image(game->mlx, game->sprites[4].img);
-	if (game->PLAYER.img)
+	if (game->sprites[5].img)
 		mlx_destroy_image(game->mlx, game->sprites[5].img);
 	ft_clear_map(game->datamap.map);
 	mlx_destroy_window(game->mlx, game->win);

@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 11:33:58 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/19 18:35:33 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:26:57 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,6 @@
 # define SPRITE_WIDTH	32
 # define SPRITE_HEIGHT	32
 
-typedef struct s_check
-{
-	int		count_potion;
-	int		count_player;
-	int		count_exit;
-	char	**cpy_map;
-}		t_check;
-
 typedef struct s_pos
 {
 	int				x;
@@ -76,7 +68,6 @@ typedef struct s_map
 	int		height;
 	t_pos	player;
 	int		potions_count;
-	t_check	check;
 }			t_map;
 
 typedef struct s_game
@@ -88,18 +79,22 @@ typedef struct s_game
 	int			nb_moves;
 }				t_game;
 
+int		ft_render(t_game *game);
 int		ft_escape_to_quit(int key, t_game *game);
 int		ft_move(int key, t_game *game);
-int		ft_end_game(t_game *game);
-int		ft_render(t_game *game);
-int		ft_check_map(t_map *datamap);
 void	ft_load_sprites(t_game *game);
 t_map	ft_load_map(int fdmap);
+int		ft_end_game(t_game *game);
 char	**ft_add_line(char **old_map, char *new_line);
 void	ft_swap(char *a, char *b);
 void	ft_get_datamap(t_map *datamap);
 void	ft_clear_map(char **map);
 char	**ft_copy_map(char **map);
 int		ft_check_map(t_map *datamap);
+int		ft_check_another(char **map);
+void	ft_flood_fill(t_map *cpy, int row, int col);
+int		ft_is_border_wall(t_map *datamap);
+int		ft_is_map_rect(t_map *datamap);
+int		ft_count(char **map, char what);
 
 #endif
