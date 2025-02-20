@@ -6,11 +6,26 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:19 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/20 17:22:31 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:44:26 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+// return fd if path ok
+int	ft_check_path(char *path)
+{
+	int	fd;
+
+	if (ft_strnstr(path, ".ber", ft_strlen(path)) == NULL)
+		return (ft_perror("no .ber\n"), FAIL);
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+		return (close(fd), FAIL);
+	if (read(fd, NULL, 0) == -1)
+		return (ft_perror("Wrong file\n"), FAIL);
+	return (fd);
+}
 
 /**==============================================
  * 			Check si la map est :
@@ -25,6 +40,8 @@ int	ft_check_map(t_map *datamap)
 {
 	t_map	cpy;
 
+	if (!datamap || !datamap->map)
+		return (ft_perror("No map\n"), FAIL);
 	if (ft_is_map_rect(datamap) == FAIL || ft_is_border_wall(datamap) == FAIL)
 		return (FAIL);
 	if (ft_count(datamap->map, 'C') <= 0 || ft_count(datamap->map, 'P') != 1
@@ -69,7 +86,9 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (ft_perror("Enter the path of the map only\n"), FAIL);
-	game.datamap = ft_load_map(open(av[1], O_RDONLY));
+	game.datamap = ft_load_map(ft_check_path(av[1]));
+	if (game.datamap.map == NULL)
+		return (FAIL);
 	if (ft_check_map(&game.datamap) == FAIL)
 		return (ft_clear_map(game.datamap.map), FAIL);
 	game.mlx = mlx_init();

@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 18:33:17 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/19 18:35:14 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:42:43 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ t_map	ft_load_map(int fdmap)
 	char	*line;
 
 	datamap.map = NULL;
+	if (fdmap == FAIL)
+		return (datamap);
 	line = get_next_line(fdmap);
 	while (line)
 	{
