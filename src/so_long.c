@@ -6,7 +6,7 @@
 /*   By: lefoffan <lefoffan@student.42perpignan.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 16:02:19 by lefoffan          #+#    #+#             */
-/*   Updated: 2025/02/20 18:44:26 by lefoffan         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:50:04 by lefoffan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_check_path(char *path)
 		return (ft_perror("no .ber\n"), FAIL);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
-		return (close(fd), FAIL);
+		return (ft_perror("No file found\n"), FAIL);
 	if (read(fd, NULL, 0) == -1)
 		return (ft_perror("Wrong file\n"), FAIL);
 	return (fd);
